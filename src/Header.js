@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
 
-function Header() {
+function Header({ setSearchTerm }) {
   const [{ basket, user }, dispatch] = useStateValue();
 
   const handleAuthenticaton = () => {
@@ -14,6 +14,11 @@ function Header() {
       auth.signOut();
     }
   }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearchTerm("")
+  };
 
   return (
     <div className="header">
@@ -26,8 +31,8 @@ function Header() {
         </Link>
 
         <div className="header__search">
-          <input className="header__searchInput" type="text" />
-          <SearchIcon className="header__searchIcon" />
+          <input className="header__searchInput" type="text" onChange={ (e) => setSearchTerm(e.target.value)} />
+          <SearchIcon className="header__searchIcon" onClick={handleSubmit} type="submit"/>
         </div>
 
         <div className="header__nav">

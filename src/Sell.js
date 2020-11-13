@@ -3,13 +3,37 @@ import './Sell.css'
 import Product from "./Product"
 import { useStateValue } from "./StateProvider";
 import { db } from "./firebase";
-import firebase from "firebase"
+import firebase from "firebase";
+import axios from 'axios';
 
 function Sell() {
   const [{ user }, dispatch] = useStateValue();
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState("")
   const [imageUrl, setImageUrl] = useState("")
+
+  const uploadImage = async (e) => {
+    e.preventDefault();
+    
+    let file = e.target.files[0];
+    let formData = new FormData();
+    formData.append('image', file);
+    
+    await axios({
+      method: 'POST',
+      url: 'https://api.imgur.com/3/image',
+      data: formData,
+      headers: {
+      Authorization: `Client-ID ${process.env.REACT_APP_IMGUR_ID}`  
+      },
+      mimeType: 'multipart/form-data'
+      }).then(res => {
+        setImageUrl(res.data.data.link)       
+      }).catch(e => {
+        console.log(e)
+    })
+
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +93,8 @@ function Sell() {
             type="url"
             required
           />
+
+          <input type='file' onChange={(e) => uploadImage(e)}/>
 
           <button onClick={handleSubmit} type="submit">
             Upload

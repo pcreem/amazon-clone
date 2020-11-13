@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./Header";
 import Home from "./Home";
@@ -19,6 +19,7 @@ const promise = loadStripe(
 
 function App() {
   const [{}, dispatch] = useStateValue();
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     // will only run once when the app component loads...
@@ -69,8 +70,8 @@ function App() {
             <Sell />
           </Route>
           <Route path="/">
-            <Header />
-            <Home />
+            <Header setSearchTerm={setSearchTerm} />
+            <Home searchTerm={searchTerm} />
           </Route>
         </Switch>
       </div>

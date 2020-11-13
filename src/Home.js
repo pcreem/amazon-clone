@@ -3,13 +3,13 @@ import "./Home.css";
 import Product from "./Product";
 import { db } from "./firebase";
 
-function Home() {
+function Home({ searchTerm }) {
   const [products, setProducts] = useState([])
 
   useEffect(()=>{
     db
     .collection('products')
-    .onSnapshot(snapshot => (
+    .onSnapshot(snapshot => ( 
             setProducts(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
@@ -27,7 +27,16 @@ function Home() {
         />
 
         <div className="home__row">
-          {products?.map(product => (
+          {products?.map(product => ( 
+                    searchTerm ? 
+                    product.data.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+                    <Product 
+                    id={product.id} 
+                    title={product.data.title}
+                    price={product.data.price}
+                    rating={product.data.rating}
+                    image={product.data.image}
+                    /> :
                     <Product 
                     id={product.id} 
                     title={product.data.title}
@@ -35,6 +44,7 @@ function Home() {
                     rating={product.data.rating}
                     image={product.data.image}
                     />
+
                 ))}
         </div>
       </div>
