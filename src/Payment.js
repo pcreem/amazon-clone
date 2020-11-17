@@ -82,6 +82,8 @@ function Payment() {
     }
 
     return (
+        user && 
+        <>
         <div className='payment'>
             <div className='payment__container'>
                 <h1>
@@ -144,7 +146,7 @@ function Payment() {
                                         thousandSeparator={true}
                                         prefix={"$"}
                                     />
-                                    <button disabled={processing || disabled || succeeded}>
+                                    <button disabled={getBasketTotal(basket) === 0 || processing || disabled || succeeded}>
                                         <span>{processing ? <p>Processing</p> : "Buy Now"}</span>
                                     </button>
                                 </div>
@@ -156,6 +158,7 @@ function Payment() {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

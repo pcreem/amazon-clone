@@ -24,7 +24,7 @@ function Sell() {
       url: 'https://api.imgur.com/3/image',
       data: formData,
       headers: {
-      Authorization: `Client-ID ${process.env.REACT_APP_IMGUR_ID}`  
+      Authorization: `Client-ID de317f1c8cd5c62`  
       },
       mimeType: 'multipart/form-data'
       }).then(res => {
