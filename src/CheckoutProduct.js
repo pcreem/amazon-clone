@@ -1,9 +1,18 @@
 import React from 'react';
 import './CheckoutProduct.css'
 import { useStateValue } from "./StateProvider";
+import { db } from "./firebase";
 
-function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
+function CheckoutProduct({ id, image, title, price, rating, hideButton, deleteButton }) {
     const [{ basket }, dispatch] = useStateValue();
+    const deleteProduct = (e) => {
+        e.preventDefault();
+
+        db
+        .collection('products')
+        .doc(id)
+        .delete()
+    }
 
     const removeFromBasket = () => {
         // remove the item from the basket
@@ -32,6 +41,10 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
                 </div>
                 {!hideButton && (
                     <button onClick={removeFromBasket}>Remove from Basket</button>
+                )}
+
+                { deleteButton && (
+                    <button onClick={deleteProduct}>Delete Product</button>
                 )}
             </div>
         </div>

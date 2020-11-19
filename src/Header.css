@@ -79,7 +79,18 @@
   padding: 8px 20px;
 }
 
-.header__bottomSell {
+.header__bottomLeftSell {
   font-size: 14px;
+  color: #fff;
+}
+
+.header__bottomLeft {
+  display: flex;
+  align-items: center;
+}
+
+.header__bottomLeftList {
+  padding-left: 10px;
+  text-decoration: none;
   color: #fff;
 }

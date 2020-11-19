@@ -5,6 +5,7 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { Link, useHistory } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
+import ProductList from "./ProductList";
 
 function Header({ setSearchTerm }) {
   const [{ basket, user }, dispatch] = useStateValue();
@@ -70,9 +71,15 @@ function Header({ setSearchTerm }) {
       </div>
       
       <div className="header__bottom">
-        <Link to="/sell">
-          <p className="header__bottomSell">{ user && 'Sell' }</p>
-        </Link>               
+        <div className="header__bottomLeft">
+          <Link to="/sell">
+            <p className="header__bottomLeftSell">{ user && 'Sell' }</p>
+          </Link>   
+          <Link to="/list">
+            <p className="header__bottomLeftList">{ user && 'List' }</p>
+          </Link>   
+        </div>
+                    
         <p className="header__optionLineTwo">Amazon's response to COVID-19</p>
       </div>
     </div>

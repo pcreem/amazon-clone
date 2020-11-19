@@ -8,6 +8,7 @@ import Login from "./Login";
 import Payment from "./Payment";
 import Orders from "./Orders";
 import Sell from "./Sell";
+import ProductList from "./ProductList";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import { loadStripe } from "@stripe/stripe-js";
@@ -68,6 +69,10 @@ function App() {
           <Route path="/sell">
             <Header />
             <Sell />
+          </Route>
+          <Route path="/list">
+            <Header />
+            <ProductList />
           </Route>
           <Route path="/">
             <Header setSearchTerm={setSearchTerm} />

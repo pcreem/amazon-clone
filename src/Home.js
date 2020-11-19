@@ -27,8 +27,7 @@ function Home({ searchTerm }) {
         />
 
         <div className="home__row">
-          {products?.map(product => ( 
-                    searchTerm ? 
+          {products?.map(product => (                     
                     product.data.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
                     <Product 
                     id={product.id} 
@@ -36,15 +35,7 @@ function Home({ searchTerm }) {
                     price={product.data.price}
                     rating={product.data.rating}
                     image={product.data.image}
-                    /> :
-                    <Product 
-                    id={product.id} 
-                    title={product.data.title}
-                    price={product.data.price}
-                    rating={product.data.rating}
-                    image={product.data.image}
-                    />
-
+                    /> 
                 ))}
         </div>
       </div>
