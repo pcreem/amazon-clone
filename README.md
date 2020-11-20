@@ -12,3 +12,9 @@
 * Stripe payment
 * Search item
 * Create and Delete Product
+
+## Tech
+
+* Firebase
+* React
+* Stripe
